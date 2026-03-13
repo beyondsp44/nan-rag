@@ -62,6 +62,19 @@ def inject_styles() -> None:
                 background: rgba(255, 255, 255, 0.8) !important;
             }
 
+            div[data-baseweb="input"] input,
+            div[data-baseweb="textarea"] textarea {
+                color: var(--text) !important;
+                -webkit-text-fill-color: var(--text) !important;
+                caret-color: var(--rose-deep) !important;
+            }
+
+            div[data-baseweb="input"] input::placeholder,
+            div[data-baseweb="textarea"] textarea::placeholder {
+                color: #a79089 !important;
+                opacity: 1 !important;
+            }
+
             .stTextInput label,
             .stSlider label {
                 color: var(--text) !important;
@@ -307,7 +320,7 @@ def render_hero() -> None:
             </p>
             <div class="pill-row">
                 <div class="pill">療程諮詢語氣更自然</div>
-                <div class="pill">問答結果更適合現場 demo</div>
+                <div class="pill">問答結果更適合現場展示</div>
                 <div class="pill">適合醫美客服與顧問知識庫展示</div>
             </div>
         </section>
@@ -386,7 +399,7 @@ def main() -> None:
             <div class="sidebar-card">
                 <p class="sidebar-title">展示模式</p>
                 <p class="sidebar-copy">
-                    這頁偏向廠商 demo 與提案情境，強調溫暖感、信任感與醫美品牌氣質。
+                    這頁偏向廠商展示與提案情境，強調溫暖感、信任感與醫美品牌氣質。
                 </p>
             </div>
             """,
@@ -421,7 +434,7 @@ def main() -> None:
             """
             <div class="empty-card">
                 輸入問題後就能看到知識庫回傳結果。<br>
-                這個版面已經調整成更適合對外展示的醫美風格，你可以直接拿來 demo。
+                這個版面已經調整成更適合對外展示的醫美風格，你可以直接用於品牌展示。
             </div>
             """,
             unsafe_allow_html=True,
