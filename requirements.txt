@@ -1,0 +1,4 @@
+streamlit==1.54.0
+sentence-transformers==5.3.0
+supabase==2.28.0
+torch==2.10.0
