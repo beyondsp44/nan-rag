@@ -1,0 +1,10 @@
+schema: spec-driven
+context: |
+  Project: NAN Aesthetics RAG
+  Runtime: Python 3.12 + Streamlit 1.54.0
+  Architecture: Streamlit UI + SentenceTransformer embedding + Supabase RPC retrieval
+rules:
+  specs:
+    - Use Traditional Chinese for project-facing documents.
+    - Use SHALL for normative requirements.
+    - Use GIVEN/WHEN/THEN/AND scenarios.
