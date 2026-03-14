@@ -78,33 +78,52 @@ def inject_styles() -> None:
 
             [data-testid="stToolbar"] button,
             [data-testid="stToolbar"] a,
-            button[kind="header"],
-            [data-testid="baseButton-headerNoPadding"] {
-                background: rgba(255, 255, 255, 0.94) !important;
-                border: 1px solid rgba(201, 167, 141, 0.45) !important;
-                border-radius: 14px !important;
-                color: var(--text) !important;
-                box-shadow: 0 10px 24px rgba(124, 90, 77, 0.12);
+            [data-testid="stToolbar"] [data-baseweb="button"],
+            [data-testid="stHeader"] button[kind="header"],
+            [data-testid="stHeader"] [data-testid="baseButton-headerNoPadding"] {
+                min-width: 2.8rem !important;
+                min-height: 2.8rem !important;
+                padding: 0.45rem 0.8rem !important;
+                background: rgba(255, 252, 248, 0.98) !important;
+                border: 1px solid rgba(176, 132, 116, 0.55) !important;
+                border-radius: 16px !important;
+                color: #4e423f !important;
+                opacity: 1 !important;
+                box-shadow: 0 12px 26px rgba(124, 90, 77, 0.16);
             }
 
             [data-testid="stToolbar"] button:hover,
             [data-testid="stToolbar"] a:hover,
-            button[kind="header"]:hover,
-            [data-testid="baseButton-headerNoPadding"]:hover {
+            [data-testid="stToolbar"] [data-baseweb="button"]:hover,
+            [data-testid="stHeader"] button[kind="header"]:hover,
+            [data-testid="stHeader"] [data-testid="baseButton-headerNoPadding"]:hover {
                 background: rgba(255, 255, 255, 1) !important;
-                border-color: rgba(191, 130, 116, 0.55) !important;
+                border-color: rgba(165, 109, 92, 0.72) !important;
             }
 
             [data-testid="stToolbar"] svg,
-            button[kind="header"] svg,
-            [data-testid="baseButton-headerNoPadding"] svg {
-                fill: var(--text) !important;
-                stroke: var(--text) !important;
+            [data-testid="stToolbar"] button svg,
+            [data-testid="stToolbar"] a svg,
+            [data-testid="stHeader"] button[kind="header"] svg,
+            [data-testid="stHeader"] [data-testid="baseButton-headerNoPadding"] svg {
+                fill: #4e423f !important;
+                stroke: #4e423f !important;
                 opacity: 1 !important;
             }
 
-            [data-testid="stToolbar"] * {
-                color: var(--text) !important;
+            [data-testid="stToolbar"] *,
+            [data-testid="stHeader"] button[kind="header"] *,
+            [data-testid="stHeader"] [data-testid="baseButton-headerNoPadding"] * {
+                color: #4e423f !important;
+                opacity: 1 !important;
+            }
+
+            [data-testid="stToolbar"] button p,
+            [data-testid="stToolbar"] button span,
+            [data-testid="stToolbar"] a p,
+            [data-testid="stToolbar"] a span {
+                font-weight: 600 !important;
+                color: #4e423f !important;
             }
 
             [data-testid="stSidebar"] {
