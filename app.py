@@ -22,15 +22,11 @@ def inject_styles() -> None:
         """
         <style>
             :root {
-                --bg: #fffaf6;
                 --surface: rgba(255, 250, 246, 0.82);
-                --surface-strong: rgba(255, 255, 255, 0.92);
                 --border: rgba(201, 167, 141, 0.32);
                 --text: #4e423f;
                 --muted: #7d6b66;
-                --rose: #dca79a;
                 --rose-deep: #bf8274;
-                --gold: #d7b98b;
                 --shadow: 0 24px 60px rgba(191, 130, 116, 0.13);
             }
 
@@ -46,28 +42,9 @@ def inject_styles() -> None:
                 background: rgba(255, 255, 255, 0);
             }
 
-            [data-testid="collapsedControl"] {
-                margin-top: 0.5rem;
-                margin-left: 0.65rem;
-            }
-
-            [data-testid="collapsedControl"] button {
-                background: rgba(255, 255, 255, 0.94) !important;
-                border: 1px solid rgba(201, 167, 141, 0.45) !important;
-                border-radius: 14px !important;
-                box-shadow: 0 10px 24px rgba(124, 90, 77, 0.12);
-                color: var(--text) !important;
-            }
-
-            [data-testid="collapsedControl"] button:hover {
-                background: rgba(255, 255, 255, 1) !important;
-                border-color: rgba(191, 130, 116, 0.55) !important;
-            }
-
-            [data-testid="collapsedControl"] svg {
-                fill: var(--text) !important;
-                stroke: var(--text) !important;
-                opacity: 1 !important;
+            [data-testid="collapsedControl"],
+            [data-testid="stSidebar"] {
+                display: none !important;
             }
 
             [data-testid="stToolbar"] {
@@ -101,6 +78,13 @@ def inject_styles() -> None:
                 border-color: rgba(165, 109, 92, 0.72) !important;
             }
 
+            [data-testid="stToolbar"] *,
+            [data-testid="stHeader"] button[kind="header"] *,
+            [data-testid="stHeader"] [data-testid="baseButton-headerNoPadding"] * {
+                color: #4e423f !important;
+                opacity: 1 !important;
+            }
+
             [data-testid="stToolbar"] svg,
             [data-testid="stToolbar"] button svg,
             [data-testid="stToolbar"] a svg,
@@ -109,31 +93,6 @@ def inject_styles() -> None:
                 fill: #4e423f !important;
                 stroke: #4e423f !important;
                 opacity: 1 !important;
-            }
-
-            [data-testid="stToolbar"] *,
-            [data-testid="stHeader"] button[kind="header"] *,
-            [data-testid="stHeader"] [data-testid="baseButton-headerNoPadding"] * {
-                color: #4e423f !important;
-                opacity: 1 !important;
-            }
-
-            [data-testid="stToolbar"] button p,
-            [data-testid="stToolbar"] button span,
-            [data-testid="stToolbar"] a p,
-            [data-testid="stToolbar"] a span {
-                font-weight: 600 !important;
-                color: #4e423f !important;
-            }
-
-            [data-testid="stSidebar"] {
-                background:
-                    linear-gradient(180deg, rgba(255, 248, 243, 0.96) 0%, rgba(255, 253, 249, 0.94) 100%);
-                border-right: 1px solid var(--border);
-            }
-
-            [data-testid="stSidebar"] > div:first-child {
-                padding-top: 2rem;
             }
 
             div[data-baseweb="input"] > div,
@@ -170,11 +129,6 @@ def inject_styles() -> None:
                 font-weight: 700;
                 background: linear-gradient(135deg, #c9867a 0%, #dca79a 52%, #e7c4a1 100%);
                 box-shadow: 0 18px 35px rgba(201, 134, 122, 0.22);
-            }
-
-            .stButton > button:hover {
-                filter: brightness(1.02);
-                transform: translateY(-1px);
             }
 
             .hero-shell {
@@ -241,56 +195,38 @@ def inject_styles() -> None:
                 font-size: 0.95rem;
             }
 
-            .section-card {
-                margin-top: 1.4rem;
-                padding: 1.35rem 1.4rem;
+            .section-card,
+            .settings-card,
+            .result-card {
                 border-radius: 24px;
-                border: 1px solid var(--border);
-                background: var(--surface);
-                box-shadow: 0 16px 36px rgba(124, 90, 77, 0.07);
+                border: 1px solid rgba(201, 167, 141, 0.24);
+                background: rgba(255, 255, 255, 0.80);
+                box-shadow: 0 16px 40px rgba(124, 90, 77, 0.08);
             }
 
-            .section-title {
+            .section-card,
+            .settings-card {
+                margin-top: 1.4rem;
+                padding: 1.35rem 1.4rem;
+            }
+
+            .section-title,
+            .settings-label {
                 margin: 0 0 0.35rem 0;
                 color: #5b4641;
-                font-size: 1.15rem;
+                font-size: 1.05rem;
                 font-weight: 700;
             }
 
-            .section-copy {
+            .section-copy,
+            .settings-copy {
                 margin: 0;
                 color: var(--muted);
                 line-height: 1.8;
             }
 
-            .sidebar-card {
-                padding: 1.15rem 1rem;
-                border-radius: 22px;
-                border: 1px solid rgba(201, 167, 141, 0.26);
-                background: rgba(255, 255, 255, 0.7);
-                box-shadow: 0 14px 30px rgba(124, 90, 77, 0.06);
-            }
-
-            .sidebar-title {
-                margin: 0;
-                color: #5b4641;
-                font-size: 1.02rem;
-                font-weight: 700;
-            }
-
-            .sidebar-copy {
-                margin: 0.55rem 0 0 0;
-                color: var(--muted);
-                font-size: 0.93rem;
-                line-height: 1.7;
-            }
-
             .result-card {
                 padding: 1.3rem 1.35rem;
-                border-radius: 24px;
-                border: 1px solid rgba(201, 167, 141, 0.24);
-                background: rgba(255, 255, 255, 0.80);
-                box-shadow: 0 16px 40px rgba(124, 90, 77, 0.08);
             }
 
             .result-head {
@@ -397,7 +333,7 @@ def render_hero() -> None:
             <h1 class="hero-title">醫美顧問問答，像接待現場一樣柔和又專業。</h1>
             <p class="hero-copy">
                 這個展示頁把 RAG 查詢包裝成更有醫美氛圍的體驗，讓廠商一進來就能感受到
-                「溫暖、安心、精緻」的品牌氣質，同時快速看到知識檢索的速度與準確度。
+                溫暖、安心、精緻的品牌氣質，同時快速看到知識檢索的速度與準確度。
             </p>
             <div class="pill-row">
                 <div class="pill">療程諮詢語氣更自然</div>
@@ -474,23 +410,37 @@ def main() -> None:
     render_hero()
     render_intro_panels()
 
-    with st.sidebar:
+    settings_col, helper_col = st.columns([1.1, 1], gap="large")
+
+    with settings_col:
         st.markdown(
             """
-            <div class="sidebar-card">
-                <p class="sidebar-title">展示模式</p>
-                <p class="sidebar-copy">
-                    這頁偏向廠商展示與提案情境，強調溫暖感、信任感與醫美品牌氣質。
+            <div class="settings-card">
+                <p class="settings-label">檢索設定</p>
+                <p class="settings-copy">
+                    這裡可以決定要顯示幾筆最相關答案。對外展示時建議維持 3 筆，
+                    既能保留比較空間，也不會讓畫面顯得太雜。
                 </p>
             </div>
             """,
             unsafe_allow_html=True,
         )
-        st.write("")
         match_count = st.slider("顯示幾筆最相關結果", min_value=1, max_value=5, value=3)
-        st.caption("請先在 Streamlit Secrets 或環境變數中設定 `SUPABASE_URL` 與 `SUPABASE_KEY`。")
 
-    st.markdown("")
+    with helper_col:
+        st.markdown(
+            """
+            <div class="settings-card">
+                <p class="settings-label">連線提醒</p>
+                <p class="settings-copy">
+                    請先在 Streamlit Secrets 或環境變數中設定
+                    <code>SUPABASE_URL</code> 與 <code>SUPABASE_KEY</code>。
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
     st.markdown(
         """
         <div class="section-card">
@@ -515,7 +465,7 @@ def main() -> None:
             """
             <div class="empty-card">
                 輸入問題後就能看到知識庫回傳結果。<br>
-                這個版面已經調整成更適合對外展示的醫美風格，你可以直接用於品牌展示。
+                檢索設定已移到主畫面中，避免側欄影響整體展示效果。
             </div>
             """,
             unsafe_allow_html=True,
@@ -536,7 +486,6 @@ def main() -> None:
         st.error(f"查詢時發生錯誤：{exc}")
         return
 
-    st.markdown("")
     if not results:
         st.info("目前沒有找到相符結果，可能需要確認向量資料、RPC 函式或 QA 資料是否已正確建立。")
         return
