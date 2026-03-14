@@ -22,7 +22,6 @@ def inject_styles() -> None:
         """
         <style>
             :root {
-                --surface: rgba(255, 250, 246, 0.82);
                 --border: rgba(201, 167, 141, 0.32);
                 --text: #4e423f;
                 --muted: #7d6b66;
@@ -61,12 +60,11 @@ def inject_styles() -> None:
                 min-width: 2.8rem !important;
                 min-height: 2.8rem !important;
                 padding: 0.45rem 0.8rem !important;
-                background: rgba(255, 252, 248, 0.98) !important;
-                border: 1px solid rgba(176, 132, 116, 0.55) !important;
+                background: rgba(45, 37, 35, 0.94) !important;
+                border: 1px solid rgba(255, 241, 232, 0.16) !important;
                 border-radius: 16px !important;
-                color: #4e423f !important;
-                opacity: 1 !important;
-                box-shadow: 0 12px 26px rgba(124, 90, 77, 0.16);
+                color: rgba(255, 252, 248, 0.96) !important;
+                box-shadow: 0 12px 26px rgba(70, 48, 43, 0.24);
             }
 
             [data-testid="stToolbar"] button:hover,
@@ -74,24 +72,14 @@ def inject_styles() -> None:
             [data-testid="stToolbar"] [data-baseweb="button"]:hover,
             [data-testid="stHeader"] button[kind="header"]:hover,
             [data-testid="stHeader"] [data-testid="baseButton-headerNoPadding"]:hover {
-                background: rgba(255, 255, 255, 1) !important;
-                border-color: rgba(165, 109, 92, 0.72) !important;
+                background: rgba(33, 27, 26, 0.98) !important;
+                border-color: rgba(255, 241, 232, 0.24) !important;
             }
 
             [data-testid="stToolbar"] *,
             [data-testid="stHeader"] button[kind="header"] *,
             [data-testid="stHeader"] [data-testid="baseButton-headerNoPadding"] * {
-                color: #4e423f !important;
-                opacity: 1 !important;
-            }
-
-            [data-testid="stToolbar"] svg,
-            [data-testid="stToolbar"] button svg,
-            [data-testid="stToolbar"] a svg,
-            [data-testid="stHeader"] button[kind="header"] svg,
-            [data-testid="stHeader"] [data-testid="baseButton-headerNoPadding"] svg {
-                fill: #4e423f !important;
-                stroke: #4e423f !important;
+                color: rgba(255, 252, 248, 0.96) !important;
                 opacity: 1 !important;
             }
 
@@ -116,7 +104,8 @@ def inject_styles() -> None:
             }
 
             .stTextInput label,
-            .stSlider label {
+            .stSlider label,
+            .streamlit-expanderHeader {
                 color: var(--text) !important;
                 font-weight: 600 !important;
             }
@@ -196,7 +185,6 @@ def inject_styles() -> None:
             }
 
             .section-card,
-            .settings-card,
             .result-card {
                 border-radius: 24px;
                 border: 1px solid rgba(201, 167, 141, 0.24);
@@ -204,22 +192,19 @@ def inject_styles() -> None:
                 box-shadow: 0 16px 40px rgba(124, 90, 77, 0.08);
             }
 
-            .section-card,
-            .settings-card {
+            .section-card {
                 margin-top: 1.4rem;
                 padding: 1.35rem 1.4rem;
             }
 
-            .section-title,
-            .settings-label {
+            .section-title {
                 margin: 0 0 0.35rem 0;
                 color: #5b4641;
                 font-size: 1.05rem;
                 font-weight: 700;
             }
 
-            .section-copy,
-            .settings-copy {
+            .section-copy {
                 margin: 0;
                 color: var(--muted);
                 line-height: 1.8;
@@ -278,6 +263,19 @@ def inject_styles() -> None:
                 color: var(--muted);
                 line-height: 1.9;
             }
+
+            div[data-testid="stExpander"] {
+                margin-top: 1.1rem;
+                border-radius: 20px !important;
+                border: 1px solid rgba(201, 167, 141, 0.24) !important;
+                background: rgba(255, 255, 255, 0.72) !important;
+                box-shadow: 0 12px 30px rgba(124, 90, 77, 0.06);
+                overflow: hidden;
+            }
+
+            div[data-testid="stExpander"] summary {
+                padding: 0.9rem 1rem !important;
+            }
         </style>
         """,
         unsafe_allow_html=True,
@@ -287,11 +285,9 @@ def inject_styles() -> None:
 def get_secret(name: str) -> str:
     if name in st.secrets:
         return str(st.secrets[name])
-
     value = os.getenv(name)
     if value:
         return value
-
     raise KeyError(name)
 
 
@@ -410,36 +406,10 @@ def main() -> None:
     render_hero()
     render_intro_panels()
 
-    settings_col, helper_col = st.columns([1.1, 1], gap="large")
-
-    with settings_col:
-        st.markdown(
-            """
-            <div class="settings-card">
-                <p class="settings-label">檢索設定</p>
-                <p class="settings-copy">
-                    這裡可以決定要顯示幾筆最相關答案。對外展示時建議維持 3 筆，
-                    既能保留比較空間，也不會讓畫面顯得太雜。
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+    with st.expander("檢索設定", expanded=False):
+        st.caption("對外展示時建議維持 3 筆最相關結果；需要時再調整。")
         match_count = st.slider("顯示幾筆最相關結果", min_value=1, max_value=5, value=3)
-
-    with helper_col:
-        st.markdown(
-            """
-            <div class="settings-card">
-                <p class="settings-label">連線提醒</p>
-                <p class="settings-copy">
-                    請先在 Streamlit Secrets 或環境變數中設定
-                    <code>SUPABASE_URL</code> 與 <code>SUPABASE_KEY</code>。
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        st.caption("請先在 Streamlit Secrets 或環境變數中設定 `SUPABASE_URL` 與 `SUPABASE_KEY`。")
 
     st.markdown(
         """
@@ -465,7 +435,7 @@ def main() -> None:
             """
             <div class="empty-card">
                 輸入問題後就能看到知識庫回傳結果。<br>
-                檢索設定已移到主畫面中，避免側欄影響整體展示效果。
+                檢索設定已收進可展開區塊，避免干擾整體展示畫面。
             </div>
             """,
             unsafe_allow_html=True,
