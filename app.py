@@ -10,6 +10,7 @@ st.set_page_config(
     page_title="NAN Aesthetics RAG",
     page_icon="✨",
     layout="wide",
+    initial_sidebar_state="collapsed",
 )
 
 
@@ -43,6 +44,67 @@ def inject_styles() -> None:
 
             [data-testid="stHeader"] {
                 background: rgba(255, 255, 255, 0);
+            }
+
+            [data-testid="collapsedControl"] {
+                margin-top: 0.5rem;
+                margin-left: 0.65rem;
+            }
+
+            [data-testid="collapsedControl"] button {
+                background: rgba(255, 255, 255, 0.94) !important;
+                border: 1px solid rgba(201, 167, 141, 0.45) !important;
+                border-radius: 14px !important;
+                box-shadow: 0 10px 24px rgba(124, 90, 77, 0.12);
+                color: var(--text) !important;
+            }
+
+            [data-testid="collapsedControl"] button:hover {
+                background: rgba(255, 255, 255, 1) !important;
+                border-color: rgba(191, 130, 116, 0.55) !important;
+            }
+
+            [data-testid="collapsedControl"] svg {
+                fill: var(--text) !important;
+                stroke: var(--text) !important;
+                opacity: 1 !important;
+            }
+
+            [data-testid="stToolbar"] {
+                top: 0.7rem;
+                right: 0.9rem;
+                gap: 0.35rem;
+            }
+
+            [data-testid="stToolbar"] button,
+            [data-testid="stToolbar"] a,
+            button[kind="header"],
+            [data-testid="baseButton-headerNoPadding"] {
+                background: rgba(255, 255, 255, 0.94) !important;
+                border: 1px solid rgba(201, 167, 141, 0.45) !important;
+                border-radius: 14px !important;
+                color: var(--text) !important;
+                box-shadow: 0 10px 24px rgba(124, 90, 77, 0.12);
+            }
+
+            [data-testid="stToolbar"] button:hover,
+            [data-testid="stToolbar"] a:hover,
+            button[kind="header"]:hover,
+            [data-testid="baseButton-headerNoPadding"]:hover {
+                background: rgba(255, 255, 255, 1) !important;
+                border-color: rgba(191, 130, 116, 0.55) !important;
+            }
+
+            [data-testid="stToolbar"] svg,
+            button[kind="header"] svg,
+            [data-testid="baseButton-headerNoPadding"] svg {
+                fill: var(--text) !important;
+                stroke: var(--text) !important;
+                opacity: 1 !important;
+            }
+
+            [data-testid="stToolbar"] * {
+                color: var(--text) !important;
             }
 
             [data-testid="stSidebar"] {
